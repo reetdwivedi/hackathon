@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Quiz</title>
+</head>
+
+<body>
+    <div class="main-div">
+        <div class="inner-div">
+            <h2 class="question">question comes here</h2>
+            <ul>
+                <li>
+                    <input type="radio" name="answer" id="ans1" class="answer">
+                    <label for="ans1" id="option1"> Answer option</label>
+                </li>
+
+                <li>
+                    <input type="radio" name="answer" id="ans2" class="answer">
+                    <label for="ans2" id="option2"> Answer option</label>
+                </li>
+                <li>
+                    <input type="radio" name="answer" id="ans3" class="answer">
+                    <label for="ans3" id="option3"> Answer option</label>
+                </li>
+                <li>
+                    <input type="radio" name="answer" id="ans4" class="answer">
+                    <label for="ans4" id="option4"> Answer option</label>
+                </li>
+            </ul>
+            <button id="submit"> submit</button>
+            <div id="showScore" class="scoreArea"></div>
+        </div>
+    </div>
+
+
+<script>
+    var quiz = [
+
+
+{
+question: "1.	Who developed Python Programming Language?",
+a: "Wick van Rossum",
+b:"Rasmus Lerdorf",
+c:" Guido van Rossum",
+d: "Niene Stom",
+  ans:"c"
+} ,
+{
+ question : "2. Which type of Programming does Python support?",
+a: "object-oriented programming",
+b:" structured programming",
+c: "functional programming",
+d:" all of the mentioned",
+  ans:"ans1"
+},
+{
+question :"  3.Is Python case sensitive when dealing with identifiers?",
+a:"no",
+b:"yes",
+c: "machine dependent",
+d: "none of the mentioned",
+ans:"ans2"
+},
+{
+  question : "4. Which of the following is the correct extension of the Python file?",
+a: ".python",
+b: ".pl",
+c: ".py",
+d: ".p",
+  ans:"c"
+},
+{
+question :"5. Is Python code compiled or interpreted?",
+a:" Python code is both compiled and interpreted",
+b: "Python code is neither compiled nor interpreted",
+c:" Python code is only compiled",
+d: "Python code is only interpreted",
+ ans:"ans4"
+}
+
+]
+
+
+
+
+
+
+var question = document.querySelector(".question");
+var option1 = document.querySelector("#option1");
+var option2 = document.querySelector("#option2")
+var option3 = document.querySelector("#option3")
+var option4 = document.querySelector("#option4")
+
+var submit = document.querySelector("#submit");
+var answers = document.querySelectorAll(".answer")
+
+var showScore = document.querySelector("#showScore")
+
+
+
+var questionCount = 0;
+var score = 0;
+const loadQuestions = () => {
+let questionList = quiz[questionCount];
+question.innerHTML = questionList.question;
+option1.innerHTML = questionList.a;
+option2.innerHTML = questionList.b;
+option3.innerHTML = questionList.c;
+option4.innerHTML = questionList.d; 
+}
+
+loadQuestions();
+
+const getCheckedAnswer = () => {
+let answer;
+answers.forEach(( curAnsEle) =>{
+    if(curAnsEle.checked){
+        answer = curAnsEle.id;
+         
+    }
+} )
+return answer;
+
+}
+
+
+
+
+
+submit.addEventListener("click",() =>{
+const checkedAnswer = getCheckedAnswer();
+
+if(checkedAnswer === quiz[questionCount].ans){
+    score++;
+}
+                                                                         
+questionCount++;
+if(questionCount < quiz.length){
+    loadQuestions()               
+}
+else{
+    showScore.innerHTML =  " you have scored" + " " + score + " /" + quiz.length;
+    document.querySelector("#showScore").style.display = "block";
+    
+}
+})
+</script>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+
+</html>

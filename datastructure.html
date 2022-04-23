@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Quiz</title>
+</head>
+
+<body>
+    <div class="main-div">
+        <div class="inner-div">
+            <h2 class="question">question comes here</h2>
+            <ul>
+                <li>
+                    <input type="radio" name="answer" id="ans1" class="answer">
+                    <label for="ans1" id="option1"> Answer option</label>
+                </li>
+
+                <li>
+                    <input type="radio" name="answer" id="ans2" class="answer">
+                    <label for="ans2" id="option2"> Answer option</label>
+                </li>
+                <li>
+                    <input type="radio" name="answer" id="ans3" class="answer">
+                    <label for="ans3" id="option3"> Answer option</label>
+                </li>
+                <li>
+                    <input type="radio" name="answer" id="ans4" class="answer">
+                    <label for="ans4" id="option4"> Answer option</label>
+                </li>
+            </ul>
+            <button id="submit"> submit</button>
+            <div id="showScore" class="scoreArea"></div>
+        </div>
+    </div>
+
+
+
+<!-- <script src="index.js"></script> -->
+
+   <script>
+
+
+
+var quiz = [
+    {
+    question :"1. Which of these best describes an array?",
+    a:" A data structure that shows a hierarchical behavior",
+    b: "Container of objects of similar types",
+    c: "Arrays are immutable once initialised",
+    d: "Array is not a data structure",
+     ans:"ans2"
+    },
+    {
+    
+    question :"2. How do you initialize an array in C?",
+    a:" int arr[3] = (1,2,3);",
+    b: "int arr(3) = {1,2,3};",
+    c: "int arr[3] = {1,2,3};",
+    d: "int arr(3) = (1,2,3);",
+    ans:"ans3"
+    },
+    {
+    question :"3. How do you instantiate an array in Java?",
+    a: "int arr[] = new int(3);",
+    b: "int arr[];",
+    c: "int arr[] = new int[3];",
+    d: "int arr() = new int(3);",
+     ans:"ans3"
+    },
+    {
+    question :"4. Which of the following is the correct way to declare a multidimensional array in Java?",
+    a: "int[] arr;",
+    b: "int arr[[]];",
+    c: "int[][]arr;",
+    d:" int[[]] arr;",
+    ans:"ans3"
+    },
+
+
+
+    {
+        question :"5. When does the ArrayIndexOutOfBoundsException occur?",
+        a: "Compile-time",
+        b: "Run-time",
+        c:" Not an error",
+        d:" Not an exception at all",
+        ans:"ans2"
+        }
+        
+        
+        
+        ]
+    
+        var question = document.querySelector(".question");
+        var option1 = document.querySelector("#option1");
+        var option2 = document.querySelector("#option2")
+        var option3 = document.querySelector("#option3")
+        var option4 = document.querySelector("#option4")
+        
+        var submit = document.querySelector("#submit");
+        var answers = document.querySelectorAll(".answer")
+        
+        var showScore = document.querySelector("#showScore")
+        
+        
+        
+        var questionCount = 0;
+        var score = 0;
+        const loadQuestions = () => {
+            let questionList = quiz[questionCount];
+            question.innerHTML = questionList.question;
+            option1.innerHTML = questionList.a;
+            option2.innerHTML = questionList.b;
+            option3.innerHTML = questionList.c;
+            option4.innerHTML = questionList.d;
+        }
+        
+        loadQuestions();
+        
+        const getCheckedAnswer = () => {
+            let answer;
+            answers.forEach(( curAnsEle) =>{
+                if(curAnsEle.checked){
+                    answer = curAnsEle.id;
+                     
+                }
+            } )
+            return answer;
+        
+        }
+        
+        
+        
+        
+        
+        submit.addEventListener("click",() =>{
+            const checkedAnswer = getCheckedAnswer();
+            
+            if(checkedAnswer === quiz[questionCount].ans){
+                score++;
+            }
+                                                                                     
+            questionCount++;
+            if(questionCount < quiz.length){
+                loadQuestions()               
+            }
+            else{
+                showScore.innerHTML =  " you have scored" + " " + score + " /" + quiz.length;
+                document.querySelector("#showScore").style.display = "block";
+                
+            }
+        })    
+   </script>
+
+</body>
+
+</html>
